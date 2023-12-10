@@ -45,6 +45,20 @@ def resize_images(source_dir, target_dir, size=(256, 256)):
 
 
 
+# Replace with the actual paths
+crop_images_to_square('Images', 'Crop')
+resize_images('Crop', 'FFHQ/Images')
+
+folder_path = 'Crop'  # Path to the folder you want to delete
+
+# Check if the folder exists
+if os.path.exists(folder_path) and os.path.isdir(folder_path):
+    shutil.rmtree(folder_path)
+    print(f"Folder '{folder_path}' has been deleted.")
+else:
+    print(f"Folder '{folder_path}' does not exist.")
+
+
 def split_data(source_folder, train_folder, eval_folder, eval_ratio):
     """Split data into training and evaluation sets."""
     if not os.path.exists(train_folder):
@@ -69,20 +83,5 @@ train_folder = 'FFHQ/Train'    # Path to the training set folder
 eval_folder = 'FFHQ/Eval'      # Path to the evaluation set folder
 eval_ratio = 0.2               # Percentage of data to be used for evaluation
 
-
-
-
-# Replace with the actual paths
-crop_images_to_square('Images', 'Crop')
-resize_images('Crop', 'FFHQ/Images')
-
-folder_path = 'Crop'  # Path to the folder you want to delete
-
-# Check if the folder exists
-if os.path.exists(folder_path) and os.path.isdir(folder_path):
-    shutil.rmtree(folder_path)
-    print(f"Folder '{folder_path}' has been deleted.")
-else:
-    print(f"Folder '{folder_path}' does not exist.")
 
 split_data(source_folder, train_folder, eval_folder, eval_ratio)
